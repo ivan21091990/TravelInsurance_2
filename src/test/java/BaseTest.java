@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,7 @@ public class BaseTest {
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", properties.getProperty("drv/chromedriver_1.exe"));
+                System.setProperty("webdriver.chrome.driver", properties.getProperty("webdriver.chrome.driver"));
                 driver = new ChromeDriver();
                 break;
         }
@@ -58,5 +59,10 @@ public class BaseTest {
 
     protected void checkFillField(String value, By locator) {
         assertEquals(value, driver.findElement(locator).getAttribute("value"));
+    }
+
+    protected void TabNavigation() {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
     }
 }

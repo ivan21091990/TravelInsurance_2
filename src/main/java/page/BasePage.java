@@ -11,7 +11,6 @@ import static junit.framework.TestCase.assertEquals;
 public class BasePage {
     WebDriver driver;
 
-
     public boolean isElementPresent(By by) {
         try {
             driver.findElement(by);

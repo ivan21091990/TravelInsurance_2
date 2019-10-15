@@ -9,23 +9,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TravelInsurancePage extends BasePage {
+public class PolicySelectionPage extends BasePage {
 
-    @FindBy(xpath = "//span[contains(text(),'Оформить онлайн')]")
-    public WebElement sendAppBtn;
+    @FindBy(xpath = "//*[text()='Минимальная']/../..")
+    WebElement minBtn;
 
-    @FindBy(xpath = "//a[contains(@target, '_blank')]//img")
-    public WebElement arrangeOnlineBtn;
+    @FindBy(xpath = "//span[text()='Оформить']")
+    public WebElement issueBtn;
 
-    public TravelInsurancePage(WebDriver driver) {
+    public PolicySelectionPage(WebDriver driver){
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-
-    public void waitSendAppClickable(){
+    public void waitMinBtnClickable(){
         WebDriverWait wait = new WebDriverWait(driver, 5, 1000);
         wait.until(ExpectedConditions.visibilityOf(
-               driver.findElement(By.xpath("//span[contains(text(),'Оформить онлайн')]")))).click();
+                driver.findElement(By.xpath("\"//*[text()='Минимальная']/../..")))).click();
     }
 }
-

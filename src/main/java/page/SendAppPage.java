@@ -1,5 +1,7 @@
 package page;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,12 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SendAppPage extends BasePage {
-
-    @FindBy(xpath = "//*[text()='Минимальная']/../..")
-    WebElement minBtn;
-
-    @FindBy(xpath = "//span[text()='Оформить']")
-    WebElement issueBtn;
 
     @FindBy(xpath = "//input[@name='insured0_surname']")
     WebElement insuredSurName;
@@ -37,7 +33,7 @@ public class SendAppPage extends BasePage {
     WebElement birthDate;
 
     @FindBy(xpath = "//input[@name='male']")
-    WebElement floorRadBtn;
+   public WebElement floorRadBtn;
 
     @FindBy(xpath = "/span[text()='Продолжить']")
     public WebElement sendButton;
@@ -70,11 +66,34 @@ public class SendAppPage extends BasePage {
             case  "Дата рождения страхователя":
                 fillField(birthDate, value);
                 break;
-            case  "Пол страхователя":
-                fillField(floorRadBtn, value);
-                break;
             default:
                 throw new AssertionError("Поле '"+fieldName+"' не объявлено на странице");
         }
+    }
+
+    public String getFillField(String fieldName){
+        switch (fieldName){
+            case  "Фамилия застрахованного":
+                return insuredSurName.getAttribute("value");
+            case  "Имя застрахованного":
+                return insuredName.getAttribute("value");
+            case  "Дата рождения застрахованного":
+                return insuredBirthDate.getAttribute("value");
+            case  "Фамилия страхователя":
+                return surName.getAttribute("value");
+            case  "Имя страхователя":
+                return name.getAttribute("value");
+            case  "Отчество страхователя":
+                return middleName.getAttribute("value");
+            case  "Дата рождения страхователя":
+                return birthDate.getAttribute("value");
+        }
+        throw new AssertionError("Поле не объявлено на странице");
+    }
+
+    public void checkFieldErrorMessage(String expectedValue){
+        String xpath = "//*[text()='Заполнены не все обязательные поля']";
+        String actualValue = driver.findElement(By.xpath(xpath)).getText();
+       Assert.assertEquals(expectedValue,actualValue);
     }
 }
