@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.junit.Assert.assertEquals;
+
 public class SendAppPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='insured0_surname']")
@@ -35,7 +37,7 @@ public class SendAppPage extends BasePage {
     @FindBy(xpath = "//input[@name='male']")
    public WebElement floorRadBtn;
 
-    @FindBy(xpath = "/span[text()='Продолжить']")
+    @FindBy(xpath = "//span[text()='Продолжить']")
     public WebElement sendButton;
 
     public SendAppPage(WebDriver driver) {
@@ -91,6 +93,9 @@ public class SendAppPage extends BasePage {
         throw new AssertionError("Поле не объявлено на странице");
     }
 
+    public void checkFillField(String value, String fieldName) {
+        assertEquals(value, getFillField(fieldName));
+    }
     public void checkFieldErrorMessage(String expectedValue){
         String xpath = "//*[text()='Заполнены не все обязательные поля']";
         String actualValue = driver.findElement(By.xpath(xpath)).getText();

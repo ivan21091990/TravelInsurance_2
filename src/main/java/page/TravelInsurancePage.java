@@ -23,7 +23,7 @@ public class TravelInsurancePage extends BasePage {
     }
 
     public void waitSendAppClickable(){
-        WebDriverWait wait = new WebDriverWait(driver, 5, 1000);
+        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
         wait.until(ExpectedConditions.visibilityOf(
                driver.findElement(By.xpath("//span[contains(text(),'Оформить онлайн')]")))).click();
     }

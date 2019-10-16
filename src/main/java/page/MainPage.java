@@ -10,7 +10,7 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//ul[contains(@class, 'lg-menu__list')]")
     WebElement menuItems;
-    @FindBy(xpath = "//div[(@id= 'submenu-5')]")
+    @FindBy(xpath = "//div[(@id= 'submenu-5')]//ul[contains(@aria-label, 'Подменю')]")
     WebElement menuInsurance;
 
     public MainPage(WebDriver driver){

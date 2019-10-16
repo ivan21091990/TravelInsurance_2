@@ -22,8 +22,9 @@ public class PolicySelectionPage extends BasePage {
         this.driver = driver;
     }
     public void waitMinBtnClickable(){
-        WebDriverWait wait = new WebDriverWait(driver, 5, 1000);
+        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
         wait.until(ExpectedConditions.visibilityOf(
-                driver.findElement(By.xpath("\"//*[text()='Минимальная']/../..")))).click();
+                driver.findElement(By.xpath("//*[text()='Минимальная']/../..")))).click();
     }
+
 }
